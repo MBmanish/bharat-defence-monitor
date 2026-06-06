@@ -171,62 +171,7 @@ Latest Events
 
 <script>
 
-const events = [
-
-{
-title:"Army Exercise",
-location:"Ladakh",
-lat:34.1526,
-lng:77.5771,
-category:"military",
-color:"#dc2626"
-},
-
-{
-title:"Air Force Drill",
-location:"Jodhpur",
-lat:26.2389,
-lng:73.0243,
-category:"military",
-color:"#dc2626"
-},
-
-{
-title:"Border Infrastructure",
-location:"Arunachal Pradesh",
-lat:28.218,
-lng:94.7278,
-category:"border",
-color:"#ea580c"
-},
-
-{
-title:"Naval Deployment",
-location:"Arabian Sea",
-lat:18.5,
-lng:69.2,
-category:"maritime",
-color:"#2563eb"
-},
-
-{
-title:"Cyclone Alert",
-location:"Odisha Coast",
-lat:20.2961,
-lng:85.8245,
-category:"weather",
-color:"#7c3aed"
-},
-
-{
-title:"Port Expansion",
-location:"Mundra",
-lat:22.839,
-lng:69.721,
-category:"infrastructure",
-color:"#059669"
-}
-];
+let events = [];
 
 const map = new maplibregl.Map({
 container:"map",
@@ -238,6 +183,46 @@ zoom:4.3
 map.addControl(new maplibregl.NavigationControl());
 
 const markers=[];
+  
+async function loadData() {
+
+    const files = [
+        "data/military.json",
+        "data/border.json",
+        "data/maritime.json",
+        "data/weather.json",
+        "data/infrastructure.json"
+    ];
+
+    const responses = await Promise.all(
+        files.map(file =>
+            fetch(file).then(r => r.json())
+        )
+    );
+
+    events = responses.flat();
+
+    events.forEach(event => {
+
+        if(event.category === "military")
+            event.color = "#dc2626";
+
+        if(event.category === "border")
+            event.color = "#ea580c";
+
+        if(event.category === "maritime")
+            event.color = "#2563eb";
+
+        if(event.category === "weather")
+            event.color = "#7c3aed";
+
+        if(event.category === "infrastructure")
+            event.color = "#059669";
+    });
+
+    renderMarkers();
+    renderFeed();
+}
 
 function renderMarkers(){
 
@@ -314,8 +299,7 @@ box.addEventListener("change",renderMarkers);
 
 });
 
-renderMarkers();
-renderFeed();
+loadData();
 
 </script>
 
