@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "Army Exercise",
+    "location": "Ladakh",
+    "lat": 34.1526,
+    "lng": 77.5771,
+    "category": "military"
+  },
+  {
+    "id": 2,
+    "title": "Air Force Drill",
+    "location": "Jodhpur",
+    "lat": 26.2389,
+    "lng": 73.0243,
+    "category": "military"
+  },
+  {
+    "id": 3,
+    "title": "Mountain Warfare Training",
+    "location": "Siachen",
+    "lat": 35.421,
+    "lng": 77.109,
+    "category": "military"
+  }
+]
