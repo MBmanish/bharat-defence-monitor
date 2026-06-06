@@ -1,0 +1,415 @@
+/* ==========================================
+   LEFT SIDEBAR
+========================================== */
+
+.left-panel{
+
+    display:flex;
+    flex-direction:column;
+
+    height:100%;
+
+    overflow-y:auto;
+
+    scrollbar-width:thin;
+    scrollbar-color:#475569 #111827;
+
+}
+
+/* ==========================================
+   PANEL SECTIONS
+========================================== */
+
+.panel-section{
+
+    padding:18px;
+
+    border-bottom:1px solid var(--border);
+
+}
+
+.panel-section:last-child{
+
+    border-bottom:none;
+
+}
+
+.panel-section h3{
+
+    font-size:14px;
+
+    font-weight:600;
+
+    color:var(--text);
+
+    margin-bottom:16px;
+
+    text-transform:uppercase;
+
+    letter-spacing:1px;
+
+}
+
+/* ==========================================
+   LAYER LIST
+========================================== */
+
+.panel-section label{
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:10px;
+
+    padding:10px 12px;
+
+    margin-bottom:8px;
+
+    border-radius:8px;
+
+    background:#162031;
+
+    border:1px solid transparent;
+
+    cursor:pointer;
+
+    transition:all .15s ease;
+
+}
+
+.panel-section label:hover{
+
+    background:#1e293b;
+
+    border-color:#334155;
+
+}
+
+.panel-section label input{
+
+    margin-right:8px;
+
+    accent-color:#3b82f6;
+
+    cursor:pointer;
+
+}
+
+.panel-section label span{
+
+    color:#cbd5e1;
+
+    font-weight:600;
+
+}
+
+/* ==========================================
+   LAYER BADGES
+========================================== */
+
+.layer-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    min-width:26px;
+
+    height:22px;
+
+    padding:0 8px;
+
+    border-radius:999px;
+
+    font-size:11px;
+
+    font-weight:600;
+
+    background:#1e293b;
+
+    color:#cbd5e1;
+
+}
+
+/* ==========================================
+   CATEGORY COLORS
+========================================== */
+
+.layer-military{
+
+    border-left:3px solid var(--military);
+
+}
+
+.layer-border{
+
+    border-left:3px solid var(--border-color);
+
+}
+
+.layer-maritime{
+
+    border-left:3px solid var(--maritime);
+
+}
+
+.layer-weather{
+
+    border-left:3px solid var(--weather);
+
+}
+
+.layer-infrastructure{
+
+    border-left:3px solid var(--infrastructure);
+
+}
+
+.layer-cyber{
+
+    border-left:3px solid var(--cyber);
+
+}
+
+.layer-strategic{
+
+    border-left:3px solid var(--strategic);
+
+}
+
+.layer-transport{
+
+    border-left:3px solid var(--transport);
+
+}
+
+/* ==========================================
+   LEGEND
+========================================== */
+
+.legend-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:8px 0;
+
+    color:#cbd5e1;
+
+    font-size:14px;
+
+}
+
+.legend-dot{
+
+    width:12px;
+
+    height:12px;
+
+    border-radius:50%;
+
+    flex-shrink:0;
+
+}
+
+/* ==========================================
+   FILTER BLOCK
+========================================== */
+
+.filter-group{
+
+    margin-top:10px;
+
+}
+
+.filter-title{
+
+    font-size:12px;
+
+    text-transform:uppercase;
+
+    color:var(--muted);
+
+    margin-bottom:8px;
+
+}
+
+.filter-select{
+
+    width:100%;
+
+    padding:10px;
+
+    border-radius:8px;
+
+    background:#0f172a;
+
+    color:white;
+
+    border:1px solid var(--border);
+
+}
+
+/* ==========================================
+   QUICK FILTER BUTTONS
+========================================== */
+
+.quick-filters{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:8px;
+
+}
+
+.quick-filter{
+
+    border:none;
+
+    padding:10px;
+
+    border-radius:8px;
+
+    background:#1e293b;
+
+    color:#cbd5e1;
+
+    cursor:pointer;
+
+    transition:.15s ease;
+
+}
+
+.quick-filter:hover{
+
+    background:#334155;
+
+}
+
+.quick-filter.active{
+
+    background:#2563eb;
+
+    color:white;
+
+}
+
+/* ==========================================
+   STATUS PANEL
+========================================== */
+
+.status-box{
+
+    margin-top:15px;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    background:#162031;
+
+    border:1px solid var(--border);
+
+}
+
+.status-title{
+
+    font-size:12px;
+
+    color:var(--muted);
+
+    margin-bottom:8px;
+
+    text-transform:uppercase;
+
+}
+
+.status-value{
+
+    font-size:22px;
+
+    font-weight:700;
+
+    color:white;
+
+}
+
+/* ==========================================
+   SCROLLBAR
+========================================== */
+
+.left-panel::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+.left-panel::-webkit-scrollbar-track{
+
+    background:#111827;
+
+}
+
+.left-panel::-webkit-scrollbar-thumb{
+
+    background:#334155;
+
+    border-radius:4px;
+
+}
+
+.left-panel::-webkit-scrollbar-thumb:hover{
+
+    background:#475569;
+
+}
+
+/* ==========================================
+   SECTION ANIMATION
+========================================== */
+
+.panel-section{
+
+    animation:fadeIn .2s ease;
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+        transform:translateY(4px);
+
+    }
+
+    to{
+
+        opacity:1;
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width:900px){
+
+    .left-panel{
+
+        display:none;
+
+    }
+
+}
