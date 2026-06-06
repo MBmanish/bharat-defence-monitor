@@ -1,142 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Bharat Defence Monitor</title>
-<link href="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.css" rel="stylesheet"/>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
-body{height:100vh;overflow:hidden;background:#f5f7fa}
-.header{height:60px;background:#fff;border-bottom:1px solid #ddd;display:flex;align-items:center;padding:0 20px;font-size:22px;font-weight:bold;color:#003366}
-.stats{height:80px;background:#fff;border-bottom:1px solid #ddd;display:flex;align-items:center;gap:15px;padding:10px 20px;overflow-x:auto}
-.stat-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:10px 20px;min-width:120px}
-.stat-value{font-size:24px;font-weight:bold;color:#003366}
-.stat-label{font-size:13px;color:#64748b}
-.layout{height:calc(100vh - 140px);display:grid;grid-template-columns:280px 1fr 340px}
-.sidebar,.feed{background:#fff;overflow:auto}
-.sidebar{border-right:1px solid #ddd;padding:15px}
-.feed{border-left:1px solid #ddd}
-.sidebar h3{margin-bottom:10px;color:#003366}
-.layer{margin-bottom:10px}.layer input{margin-right:8px}
-#map{width:100%;height:100%}
-.feed-header{padding:15px;font-weight:bold;font-size:18px;border-bottom:1px solid #eee}
-.event{padding:12px;border-bottom:1px solid #eee;cursor:pointer}
-.event:hover{background:#f2f6fa}
-.event-title{font-weight:bold;margin-bottom:4px}
-.event-location{font-size:13px;color:#666}
-.legend{margin-top:25px}.legend-item{margin-bottom:8px}
-.dot{width:12px;height:12px;display:inline-block;border-radius:50%;margin-right:8px}
-.red{background:#dc2626}.orange{background:#ea580c}.blue{background:#2563eb}.green{background:#059669}.purple{background:#7c3aed}
-.search-box{width:100%;margin-top:10px;padding:8px;border:1px solid #cbd5e1;border-radius:6px}
-</style>
+
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.css">
+
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/sidebar.css">
+<link rel="stylesheet" href="css/map.css">
+
 </head>
+
 <body>
-<div class="header">
-<div style="flex:1">Bharat Defence Monitor</div>
-<div id="lastUpdated" style="font-size:14px;font-weight:normal;color:#64748b">Loading...</div>
+
+<!-- HEADER -->
+
+<header class="topbar">
+
+    <div class="brand">
+
+        <div class="brand-title">
+            Bharat Defence Monitor
+        </div>
+
+        <div class="brand-subtitle">
+            India Military Activity Monitor
+        </div>
+
+    </div>
+
+    <div class="header-right">
+
+        <div id="lastUpdated">
+            Loading...
+        </div>
+
+    </div>
+
+</header>
+
+<!-- STATS -->
+
+<section class="stats-bar">
+
+    <div class="stat-card">
+        <div class="stat-number" id="military-count">0</div>
+        <div class="stat-label">Military</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-number" id="border-count">0</div>
+        <div class="stat-label">Border</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-number" id="maritime-count">0</div>
+        <div class="stat-label">Maritime</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-number" id="weather-count">0</div>
+        <div class="stat-label">Weather</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-number" id="infrastructure-count">0</div>
+        <div class="stat-label">Infrastructure</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-number" id="cyber-count">0</div>
+        <div class="stat-label">Cyber</div>
+    </div>
+
+</section>
+
+<!-- MAIN -->
+
+<div class="main-layout">
+
+    <!-- LEFT SIDEBAR -->
+
+    <aside class="left-panel">
+
+        <div class="panel-section">
+
+            <h3>Layers</h3>
+
+            <label>
+                <input type="checkbox" checked id="military">
+                Military Activity
+                (<span id="military-layer-count">0</span>)
+            </label>
+
+            <label>
+                <input type="checkbox" checked id="border">
+                Border Incidents
+                (<span id="border-layer-count">0</span>)
+            </label>
+
+            <label>
+                <input type="checkbox" checked id="maritime">
+                Maritime Activity
+                (<span id="maritime-layer-count">0</span>)
+            </label>
+
+            <label>
+                <input type="checkbox" checked id="weather">
+                Weather Alerts
+                (<span id="weather-layer-count">0</span>)
+            </label>
+
+            <label>
+                <input type="checkbox" checked id="infrastructure">
+                Infrastructure
+                (<span id="infrastructure-layer-count">0</span>)
+            </label>
+
+            <label>
+                <input type="checkbox" checked id="cyber">
+                Cyber Events
+                (<span id="cyber-layer-count">0</span>)
+            </label>
+
+            <label>
+                <input type="checkbox" checked id="strategic">
+                Strategic Assets
+                (<span id="strategic-layer-count">0</span>)
+            </label>
+
+            <label>
+                <input type="checkbox" checked id="transport">
+                Transportation Corridors
+                (<span id="transport-layer-count">0</span>)
+            </label>
+
+        </div>
+
+        <div class="panel-section">
+
+            <h3>Legend</h3>
+
+            <div class="legend-item">
+                <span class="legend-dot military-dot"></span>
+                Military
+            </div>
+
+            <div class="legend-item">
+                <span class="legend-dot border-dot"></span>
+                Border
+            </div>
+
+            <div class="legend-item">
+                <span class="legend-dot maritime-dot"></span>
+                Maritime
+            </div>
+
+            <div class="legend-item">
+                <span class="legend-dot weather-dot"></span>
+                Weather
+            </div>
+
+            <div class="legend-item">
+                <span class="legend-dot infrastructure-dot"></span>
+                Infrastructure
+            </div>
+
+            <div class="legend-item">
+                <span class="legend-dot cyber-dot"></span>
+                Cyber
+            </div>
+
+        </div>
+
+    </aside>
+
+    <!-- MAP -->
+
+    <main class="map-panel">
+
+        <div id="map"></div>
+
+    </main>
+
+    <!-- EVENT FEED -->
+
+    <aside class="right-panel">
+
+        <div class="feed-header">
+
+            <h3>Latest Events</h3>
+
+            <input
+                type="text"
+                id="searchBox"
+                placeholder="Search events..."
+            >
+
+        </div>
+
+        <div id="eventFeed">
+
+        </div>
+
+    </aside>
+
 </div>
 
-<div class="stats">
-<div class="stat-card"><div class="stat-value" id="military-count">0</div><div class="stat-label">Military</div></div>
-<div class="stat-card"><div class="stat-value" id="border-count">0</div><div class="stat-label">Border</div></div>
-<div class="stat-card"><div class="stat-value" id="maritime-count">0</div><div class="stat-label">Maritime</div></div>
-<div class="stat-card"><div class="stat-value" id="weather-count">0</div><div class="stat-label">Weather</div></div>
-<div class="stat-card"><div class="stat-value" id="infra-count">0</div><div class="stat-label">Infrastructure</div></div>
-</div>
-
-<div class="layout">
-<div class="sidebar">
-<h3>Layers</h3>
-<div class="layer"><input type="checkbox" checked id="military">Military Activity (<span id="military-layer-count">0</span>)</div>
-<div class="layer"><input type="checkbox" checked id="border">Border Incidents (<span id="border-layer-count">0</span>)</div>
-<div class="layer"><input type="checkbox" checked id="maritime">Maritime Activity (<span id="maritime-layer-count">0</span>)</div>
-<div class="layer"><input type="checkbox" checked id="weather">Weather Alerts (<span id="weather-layer-count">0</span>)</div>
-<div class="layer"><input type="checkbox" checked id="infrastructure">Infrastructure (<span id="infra-layer-count">0</span>)</div>
-
-<div class="legend">
-<h3>Legend</h3>
-<div class="legend-item"><span class="dot red"></span>Military</div>
-<div class="legend-item"><span class="dot orange"></span>Border</div>
-<div class="legend-item"><span class="dot blue"></span>Maritime</div>
-<div class="legend-item"><span class="dot green"></span>Infrastructure</div>
-<div class="legend-item"><span class="dot purple"></span>Weather</div>
-</div>
-</div>
-
-<div id="map"></div>
-
-<div class="feed">
-<div class="feed-header">
-<div>Latest Events</div>
-<input id="searchBox" class="search-box" placeholder="Search events...">
-</div>
-<div id="events"></div>
-</div>
-</div>
+<!-- MAPLIBRE -->
 
 <script src="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.js"></script>
-<script>
-let events=[];
-const map=new maplibregl.Map({
- container:"map",
- style:"https://demotiles.maplibre.org/style.json",
- center:[78.9629,22.5937],
- zoom:4.3
-});
-map.addControl(new maplibregl.NavigationControl());
-const markers=[];
 
-async function loadData(){
- const files=["data/military.json","data/border.json","data/maritime.json","data/weather.json","data/infrastructure.json"];
- const responses=await Promise.all(files.map(f=>fetch(f).then(r=>r.json())));
- events=responses.flat();
- const colors={military:"#dc2626",border:"#ea580c",maritime:"#2563eb",weather:"#7c3aed",infrastructure:"#059669"};
- events.forEach(e=>e.color=colors[e.category]||"#333");
- renderMarkers(); renderFeed(); updateStats();
- document.getElementById("lastUpdated").innerText="Updated: "+new Date().toLocaleString();
-}
+<!-- APPLICATION MODULES -->
 
-function updateStats(){
- ["military","border","maritime","weather","infrastructure"].forEach(cat=>{
-   const count=events.filter(e=>e.category===cat).length;
-   const idMap={military:"military",border:"border",maritime:"maritime",weather:"weather",infrastructure:"infra"};
-   document.getElementById(idMap[cat]+"-count").innerText=count;
-   document.getElementById(cat==="infrastructure"?"infra-layer-count":cat+"-layer-count").innerText=count;
- });
-}
+<script src="js/map.js"></script>
+<script src="js/layers.js"></script>
+<script src="js/sidebar.js"></script>
+<script src="js/stats.js"></script>
+<script src="js/search.js"></script>
+<script src="js/app.js"></script>
 
-function renderMarkers(){
- markers.forEach(m=>m.remove()); markers.length=0;
- events.forEach(event=>{
-   const enabled=document.getElementById(event.category)?.checked;
-   if(enabled===false) return;
-   const el=document.createElement("div");
-   el.style.cssText=`width:14px;height:14px;border-radius:50%;background:${event.color};border:2px solid white`;
-   const marker=new maplibregl.Marker(el)
-   .setLngLat([event.lng,event.lat])
-   .setPopup(new maplibregl.Popup().setHTML(`<b>${event.title}</b><br>${event.location}`))
-   .addTo(map);
-   markers.push(marker);
- });
-}
-
-function renderFeed(filter=""){
- const container=document.getElementById("events");
- container.innerHTML="";
- events.filter(e=>e.title.toLowerCase().includes(filter.toLowerCase())||e.location.toLowerCase().includes(filter.toLowerCase()))
- .forEach(event=>{
-   const div=document.createElement("div");
-   div.className="event";
-   div.innerHTML=`<div class="event-title">${event.title}</div><div class="event-location">${event.location}</div>`;
-   div.onclick=()=>map.flyTo({center:[event.lng,event.lat],zoom:7});
-   container.appendChild(div);
- });
-}
-
-document.querySelectorAll("input[type=checkbox]").forEach(box=>box.addEventListener("change",renderMarkers));
-document.getElementById("searchBox").addEventListener("input",e=>renderFeed(e.target.value));
-loadData();
-</script>
 </body>
+
 </html>
