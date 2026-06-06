@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bharat Defence Monitor</title>
+
+<link href="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.css" rel="stylesheet"/>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+height:100vh;
+overflow:hidden;
+background:#f5f7fa;
+}
+
+.header{
+height:60px;
+background:white;
+border-bottom:1px solid #ddd;
+display:flex;
+align-items:center;
+padding:0 20px;
+font-size:22px;
+font-weight:bold;
+color:#003366;
+}
+
+.layout{
+height:calc(100vh - 60px);
+display:grid;
+grid-template-columns:280px 1fr 340px;
+}
+
+.sidebar{
+background:white;
+border-right:1px solid #ddd;
+overflow:auto;
+padding:15px;
+}
+
+.sidebar h3{
+margin-bottom:10px;
+color:#003366;
+}
+
+.layer{
+margin-bottom:10px;
+}
+
+.layer input{
+margin-right:8px;
+}
+
+#map{
+width:100%;
+height:100%;
+}
+
+.feed{
+background:white;
+border-left:1px solid #ddd;
+overflow:auto;
+}
+
+.feed-header{
+padding:15px;
+font-weight:bold;
+font-size:18px;
+border-bottom:1px solid #eee;
+}
+
+.event{
+padding:12px;
+border-bottom:1px solid #eee;
+cursor:pointer;
+}
+
+.event:hover{
+background:#f2f6fa;
+}
+
+.event-title{
+font-weight:bold;
+margin-bottom:4px;
+}
+
+.event-location{
+font-size:13px;
+color:#666;
+}
+
+.legend{
+margin-top:25px;
+}
+
+.legend-item{
+margin-bottom:8px;
+}
+
+.dot{
+width:12px;
+height:12px;
+display:inline-block;
+border-radius:50%;
+margin-right:8px;
+}
+
+.red{background:#dc2626;}
+.orange{background:#ea580c;}
+.blue{background:#2563eb;}
+.green{background:#059669;}
+.purple{background:#7c3aed;}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+Bharat Defence Monitor
+</div>
+
+<div class="layout">
+
+<div class="sidebar">
+
+<h3>Layers</h3>
+
+<div class="layer"><input type="checkbox" checked id="military">Military Activity</div>
+<div class="layer"><input type="checkbox" checked id="border">Border Incidents</div>
+<div class="layer"><input type="checkbox" checked id="maritime">Maritime Activity</div>
+<div class="layer"><input type="checkbox" checked id="weather">Weather Alerts</div>
+<div class="layer"><input type="checkbox" checked id="infrastructure">Infrastructure</div>
+
+<div class="legend">
+<h3>Legend</h3>
+
+<div class="legend-item"><span class="dot red"></span>Military</div>
+<div class="legend-item"><span class="dot orange"></span>Border</div>
+<div class="legend-item"><span class="dot blue"></span>Maritime</div>
+<div class="legend-item"><span class="dot green"></span>Infrastructure</div>
+<div class="legend-item"><span class="dot purple"></span>Weather</div>
+
+</div>
+
+</div>
+
+<div id="map"></div>
+
+<div class="feed">
+
+<div class="feed-header">
+Latest Events
+</div>
+
+<div id="events"></div>
+
+</div>
+
+</div>
+
+<script src="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.js"></script>
+
+<script>
+
+const events = [
+
+{
+title:"Army Exercise",
+location:"Ladakh",
+lat:34.1526,
+lng:77.5771,
+category:"military",
+color:"#dc2626"
+},
+
+{
+title:"Air Force Drill",
+location:"Jodhpur",
+lat:26.2389,
+lng:73.0243,
+category:"military",
+color:"#dc2626"
+},
+
+{
+title:"Border Infrastructure",
+location:"Arunachal Pradesh",
+lat:28.218,
+lng:94.7278,
+category:"border",
+color:"#ea580c"
+},
+
+{
+title:"Naval Deployment",
+location:"Arabian Sea",
+lat:18.5,
+lng:69.2,
+category:"maritime",
+color:"#2563eb"
+},
+
+{
+title:"Cyclone Alert",
+location:"Odisha Coast",
+lat:20.2961,
+lng:85.8245,
+category:"weather",
+color:"#7c3aed"
+},
+
+{
+title:"Port Expansion",
+location:"Mundra",
+lat:22.839,
+lng:69.721,
+category:"infrastructure",
+color:"#059669"
+}
+];
+
+const map = new maplibregl.Map({
+container:"map",
+style:"https://demotiles.maplibre.org/style.json",
+center:[78.9629,22.5937],
+zoom:4.3
+});
+
+map.addControl(new maplibregl.NavigationControl());
+
+const markers=[];
+
+function renderMarkers(){
+
+markers.forEach(m=>m.remove());
+markers.length=0;
+
+events.forEach(event=>{
+
+const enabled =
+document.getElementById(event.category)?.checked;
+
+if(enabled===false) return;
+
+const el=document.createElement("div");
+
+el.style.width="14px";
+el.style.height="14px";
+el.style.borderRadius="50%";
+el.style.background=event.color;
+el.style.border="2px solid white";
+
+const marker=new maplibregl.Marker(el)
+.setLngLat([event.lng,event.lat])
+.setPopup(
+new maplibregl.Popup().setHTML(
+`
+<b>${event.title}</b><br>
+${event.location}
+`
+)
+)
+.addTo(map);
+
+markers.push(marker);
+
+});
+}
+
+function renderFeed(){
+
+const container=document.getElementById("events");
+
+container.innerHTML="";
+
+events.forEach(event=>{
+
+const div=document.createElement("div");
+
+div.className="event";
+
+div.innerHTML=`
+<div class="event-title">${event.title}</div>
+<div class="event-location">${event.location}</div>
+`;
+
+div.onclick=()=>{
+
+map.flyTo({
+center:[event.lng,event.lat],
+zoom:7
+});
+
+};
+
+container.appendChild(div);
+
+});
+}
+
+document.querySelectorAll("input[type=checkbox]")
+.forEach(box=>{
+
+box.addEventListener("change",renderMarkers);
+
+});
+
+renderMarkers();
+renderFeed();
+
+</script>
+
+</body>
+</html>
