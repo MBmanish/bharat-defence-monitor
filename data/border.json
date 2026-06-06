@@ -1,0 +1,18 @@
+[
+  {
+    "id": 101,
+    "title": "Border Infrastructure Project",
+    "location": "Arunachal Pradesh",
+    "lat": 28.218,
+    "lng": 94.7278,
+    "category": "border"
+  },
+  {
+    "id": 102,
+    "title": "Forward Area Road Upgrade",
+    "location": "Tawang",
+    "lat": 27.586,
+    "lng": 91.859,
+    "category": "border"
+  }
+]
