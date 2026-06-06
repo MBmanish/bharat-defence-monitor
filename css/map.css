@@ -1,0 +1,490 @@
+/* ==========================================
+   MAP PANEL
+========================================== */
+
+.map-panel{
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:#050b14;
+
+}
+
+/* ==========================================
+   MAP CONTAINER
+========================================== */
+
+#map{
+
+    width:100%;
+    height:100%;
+
+    background:#050b14;
+
+}
+
+/* ==========================================
+   MAP OVERLAYS
+========================================== */
+
+.map-overlay{
+
+    position:absolute;
+
+    z-index:1000;
+
+    background:rgba(15,23,42,0.92);
+
+    border:1px solid #334155;
+
+    backdrop-filter:blur(8px);
+
+    border-radius:10px;
+
+}
+
+/* ==========================================
+   TOP MAP INFO BAR
+========================================== */
+
+.map-status{
+
+    position:absolute;
+
+    top:15px;
+    left:15px;
+
+    padding:12px 16px;
+
+    min-width:220px;
+
+}
+
+.map-status-title{
+
+    font-size:11px;
+
+    color:#94a3b8;
+
+    text-transform:uppercase;
+
+    letter-spacing:1px;
+
+    margin-bottom:4px;
+
+}
+
+.map-status-value{
+
+    font-size:20px;
+
+    font-weight:700;
+
+    color:white;
+
+}
+
+/* ==========================================
+   INDIA FOCUS BADGE
+========================================== */
+
+.india-focus{
+
+    position:absolute;
+
+    top:15px;
+    right:15px;
+
+    padding:10px 14px;
+
+    background:rgba(17,24,39,.95);
+
+    border:1px solid #334155;
+
+    border-radius:8px;
+
+    z-index:1000;
+
+    font-size:12px;
+
+    color:#e5e7eb;
+}
+
+/* ==========================================
+   CUSTOM MARKERS
+========================================== */
+
+.event-marker{
+
+    width:16px;
+    height:16px;
+
+    border-radius:50%;
+
+    border:2px solid white;
+
+    cursor:pointer;
+
+    transition:all .15s ease;
+}
+
+.event-marker:hover{
+
+    transform:scale(1.35);
+
+}
+
+/* ==========================================
+   CATEGORY COLORS
+========================================== */
+
+.marker-military{
+
+    background:#ef4444;
+
+    box-shadow:
+    0 0 10px rgba(239,68,68,.8),
+    0 0 20px rgba(239,68,68,.4);
+
+}
+
+.marker-border{
+
+    background:#f97316;
+
+    box-shadow:
+    0 0 10px rgba(249,115,22,.8),
+    0 0 20px rgba(249,115,22,.4);
+
+}
+
+.marker-maritime{
+
+    background:#3b82f6;
+
+    box-shadow:
+    0 0 10px rgba(59,130,246,.8),
+    0 0 20px rgba(59,130,246,.4);
+
+}
+
+.marker-weather{
+
+    background:#8b5cf6;
+
+    box-shadow:
+    0 0 10px rgba(139,92,246,.8),
+    0 0 20px rgba(139,92,246,.4);
+
+}
+
+.marker-infrastructure{
+
+    background:#10b981;
+
+    box-shadow:
+    0 0 10px rgba(16,185,129,.8),
+    0 0 20px rgba(16,185,129,.4);
+
+}
+
+.marker-cyber{
+
+    background:#eab308;
+
+    box-shadow:
+    0 0 10px rgba(234,179,8,.8),
+    0 0 20px rgba(234,179,8,.4);
+
+}
+
+.marker-strategic{
+
+    background:#ec4899;
+
+    box-shadow:
+    0 0 10px rgba(236,72,153,.8),
+    0 0 20px rgba(236,72,153,.4);
+
+}
+
+.marker-transport{
+
+    background:#06b6d4;
+
+    box-shadow:
+    0 0 10px rgba(6,182,212,.8),
+    0 0 20px rgba(6,182,212,.4);
+
+}
+
+/* ==========================================
+   SEVERITY MARKERS
+========================================== */
+
+.severity-low{
+
+    opacity:.75;
+
+}
+
+.severity-medium{
+
+    opacity:1;
+
+}
+
+.severity-high{
+
+    transform:scale(1.15);
+
+}
+
+.severity-critical{
+
+    animation:pulse 2s infinite;
+
+}
+
+@keyframes pulse{
+
+    0%{
+
+        transform:scale(1);
+
+    }
+
+    50%{
+
+        transform:scale(1.35);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
+}
+
+/* ==========================================
+   MAPLIBRE CONTROLS
+========================================== */
+
+.maplibregl-ctrl-group{
+
+    background:#111827 !important;
+
+    border:1px solid #334155 !important;
+
+}
+
+.maplibregl-ctrl-group button{
+
+    background:#111827 !important;
+
+    color:white !important;
+
+}
+
+.maplibregl-ctrl-group button:hover{
+
+    background:#1e293b !important;
+
+}
+
+/* ==========================================
+   POPUPS
+========================================== */
+
+.maplibregl-popup-content{
+
+    background:#111827 !important;
+
+    color:#e5e7eb !important;
+
+    border:1px solid #334155;
+
+    border-radius:12px;
+
+    min-width:260px;
+
+    padding:14px;
+
+}
+
+.maplibregl-popup-tip{
+
+    border-top-color:#111827 !important;
+
+}
+
+.popup-title{
+
+    font-size:15px;
+
+    font-weight:700;
+
+    margin-bottom:8px;
+
+}
+
+.popup-location{
+
+    font-size:13px;
+
+    color:#94a3b8;
+
+    margin-bottom:8px;
+
+}
+
+.popup-date{
+
+    font-size:12px;
+
+    color:#64748b;
+
+    margin-bottom:10px;
+
+}
+
+.popup-summary{
+
+    font-size:13px;
+
+    line-height:1.5;
+
+}
+
+/* ==========================================
+   MAP FOOTER
+========================================== */
+
+.map-footer{
+
+    position:absolute;
+
+    bottom:12px;
+    left:12px;
+
+    z-index:1000;
+
+    background:rgba(17,24,39,.92);
+
+    border:1px solid #334155;
+
+    border-radius:8px;
+
+    padding:8px 12px;
+
+    font-size:11px;
+
+    color:#94a3b8;
+
+}
+
+/* ==========================================
+   LOADING STATE
+========================================== */
+
+.map-loading{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    background:#050b14;
+
+    color:white;
+
+    z-index:5000;
+
+}
+
+.loading-spinner{
+
+    width:40px;
+    height:40px;
+
+    border:3px solid #334155;
+    border-top:3px solid #3b82f6;
+
+    border-radius:50%;
+
+    animation:spin 1s linear infinite;
+
+}
+
+@keyframes spin{
+
+    from{
+
+        transform:rotate(0deg);
+
+    }
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+/* ==========================================
+   CLUSTERS (Future Use)
+========================================== */
+
+.cluster-marker{
+
+    width:42px;
+    height:42px;
+
+    border-radius:50%;
+
+    background:#2563eb;
+
+    color:white;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-weight:700;
+
+    border:2px solid white;
+
+    box-shadow:
+    0 0 15px rgba(37,99,235,.8);
+
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width:900px){
+
+    .india-focus{
+
+        display:none;
+
+    }
+
+    .map-status{
+
+        min-width:160px;
+
+    }
+
+}
