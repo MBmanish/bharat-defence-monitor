@@ -163,6 +163,8 @@ function createMarker(event) {
         CATEGORY_COLORS[
             event.category
         ] || "#64748b";
+   
+   console.log(event.title,event.category,color);
 
     markerElement.style.width =
         "14px";
