@@ -415,6 +415,16 @@ function getDashboardSummary() {
         cyber:
             getEventsByCategory(
                 "cyber"
+            ).length,
+
+        strategic:
+            getEventsByCategory(
+                "strategic"
+            ).length,
+
+        transport:
+            getEventsByCategory(
+                "transport"
             ).length
 
     };
