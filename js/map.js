@@ -7,14 +7,17 @@ let map;
 let activeMarkers = [];
 
 const CATEGORY_COLORS = {
-    military: "#ef4444",
-    border: "#f97316",
-    maritime: "#3b82f6",
-    weather: "#8b5cf6",
-    infrastructure: "#10b981",
-    cyber: "#eab308",
-    strategic: "#ec4899",
-    transport: "#06b6d4"
+
+    military: "#dc2626",
+    border: "#ea580c",
+    maritime: "#2563eb",
+    weather: "#7c3aed",
+    infrastructure: "#059669",
+
+    cyber: "#0891b2",
+    strategic: "#b45309",
+    transport: "#475569"
+
 };
 
 /* ==========================================
@@ -156,31 +159,97 @@ function createMarker(event) {
     const markerElement =
         document.createElement("div");
 
-    markerElement.className =
-        `event-marker
-         marker-${event.category}
-         severity-${event.severity || "medium"}`;
+    const color =
+        CATEGORY_COLORS[
+            event.category
+        ] || "#64748b";
+
+    markerElement.style.width =
+        "14px";
+
+    markerElement.style.height =
+        "14px";
+
+    markerElement.style.borderRadius =
+        "50%";
+
+    markerElement.style.background =
+        color;
+
+    markerElement.style.border =
+        "2px solid white";
+
+    markerElement.style.boxShadow =
+        "0 0 4px rgba(0,0,0,0.4)";
+
+    if (
+        event.severity ===
+        "high"
+    ) {
+
+        markerElement.style.width =
+            "18px";
+
+        markerElement.style.height =
+            "18px";
+
+    }
+
+    if (
+        event.severity ===
+        "critical"
+    ) {
+
+        markerElement.style.width =
+            "22px";
+
+        markerElement.style.height =
+            "22px";
+
+        markerElement.style.boxShadow =
+            "0 0 10px rgba(255,0,0,0.8)";
+
+    }
 
     const popupHTML = `
-        <div class="popup-title">
-            ${event.title}
+
+        <div style="min-width:250px">
+
+            <div style="
+                font-weight:bold;
+                font-size:15px;
+                margin-bottom:8px;
+            ">
+                ${event.title}
+            </div>
+
+            <div>
+                📍 ${event.location}
+            </div>
+
+            <div>
+                📅 ${event.date || ""}
+            </div>
+
+            <div>
+                🏷️ ${event.category}
+            </div>
+
+            <div style="
+                margin-top:8px;
+                color:#475569;
+            ">
+                ${event.summary || ""}
+            </div>
+
         </div>
 
-        <div class="popup-location">
-            📍 ${event.location}
-        </div>
-
-        <div class="popup-date">
-            ${event.date || ""}
-        </div>
-
-        <div class="popup-summary">
-            ${event.summary || ""}
-        </div>
     `;
 
     const marker =
-        new maplibregl.Marker(markerElement)
+        new maplibregl.Marker(
+            markerElement
+        )
 
         .setLngLat([
             event.lng,
@@ -189,13 +258,18 @@ function createMarker(event) {
 
         .setPopup(
             new maplibregl.Popup({
-                closeButton: true
-            }).setHTML(popupHTML)
+                closeButton:true,
+                maxWidth:"350px"
+            }).setHTML(
+                popupHTML
+            )
         )
 
         .addTo(map);
 
-    activeMarkers.push(marker);
+    activeMarkers.push(
+        marker
+    );
 
 }
 
