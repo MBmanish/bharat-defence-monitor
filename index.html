@@ -199,25 +199,72 @@
 
     </main>
 
-    <aside class="right-panel">
+<aside class="right-panel">
 
-        <div class="feed-header">
+    <!-- DEFENCE VIDEO CENTER -->
 
-            <h3>Latest Events</h3>
+    <div class="video-panel">
 
-            <input
-                type="text"
-                id="searchBox"
-                placeholder="Search events..."
-            >
+        <div class="video-header">
+
+            <span>
+                🔴 Defence Video Center
+            </span>
+
+            <select id="videoSelector">
+
+                <option value="Tz2jFqv1k_w">
+                    Indian Navy
+                </option>
+
+                <option value="kM7YfhfkiEE">
+                    Indian Army
+                </option>
+
+                <option value="HcOc7P5BMi4">
+                    Indian Air Force
+                </option>
+
+                <option value="9Auq9mYxFEE">
+                    Ministry of Defence
+                </option>
+
+                <option value="M7lc1UVf-VE">
+                    Defence Analysis
+                </option>
+
+            </select>
 
         </div>
 
-        <div id="eventFeed">
+        <iframe
+            id="defenceVideo"
+            src="https://www.youtube.com/embed/Tz2jFqv1k_w"
+            title="Defence Video"
+            allowfullscreen>
+        </iframe>
 
-        </div>
+    </div>
 
-    </aside>
+    <!-- EVENTS -->
+
+    <div class="feed-header">
+
+        <h3>Latest Events</h3>
+
+        <input
+            type="text"
+            id="searchBox"
+            placeholder="Search events..."
+        >
+
+    </div>
+
+    <div id="eventFeed">
+
+    </div>
+
+</aside>
 
 </div>
 
