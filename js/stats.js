@@ -145,6 +145,16 @@ const StatsManager = {
             this.stats.cyber
         );
 
+        setValue(
+            "strategic-count",
+            this.stats.strategic
+        );
+
+        setValue(
+            "transport-count",
+            this.stats.transport
+        );
+
         if (
             typeof LayerManager !==
             "undefined"
