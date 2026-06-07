@@ -51,6 +51,66 @@
 }
 
 /* ==========================================
+   VIDEO CENTER
+========================================== */
+
+.video-panel{
+
+    background:#ffffff;
+
+    border-bottom:1px solid #e5e7eb;
+
+    padding:12px;
+
+}
+
+.video-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:10px;
+
+    font-weight:600;
+
+    color:#dc2626;
+
+}
+
+.video-header select{
+
+    border:1px solid #cbd5e1;
+
+    border-radius:6px;
+
+    padding:5px 8px;
+
+    font-size:12px;
+
+    background:white;
+
+    cursor:pointer;
+
+}
+
+#defenceVideo{
+
+    width:100%;
+
+    height:240px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:black;
+
+}
+
+/* ==========================================
    LAYER LIST
 ========================================== */
 
